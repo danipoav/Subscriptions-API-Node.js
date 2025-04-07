@@ -1,10 +1,16 @@
+import { Request, Response } from 'express';
+import { connectDB } from "./database";
+
+
 const express = require('express');
 const app = express();
 
+connectDB();
+
 app.use(express.json());
 
-app.get('/ping', (req, res) => {
-    res.send('pong');
+app.use('/', (req: Request, res: Response) => {
+    res.json({ message: 'Welcome to my subscriptions API' });
 });
 
 const PORT = process.env.PORT || 3000;
