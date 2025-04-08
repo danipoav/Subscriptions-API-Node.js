@@ -1,5 +1,4 @@
 import connection, { AppDataSource } from '../database';
-import { v4 as uuidv4 } from 'uuid';
 import { Subscription, SubscriptionRequest } from '../models/subscription';
 
 export const fetchSubsByUserId = async (id: string) => {
@@ -7,7 +6,7 @@ export const fetchSubsByUserId = async (id: string) => {
 
     const subscriptions = await subscriptionRepository.find({
         where: { user: { id: Number(id) } },
-        relations: ['plan', 'user'],
+        relations: ['plan', 'plan.service', 'user'],
     });
 
     return subscriptions;
@@ -31,5 +30,5 @@ export const createSubscription = async (request: SubscriptionRequest) => {
 
     await subscriptionRepository.save(subscription);
 
-    return 'Subscription created successfully';
+    return subscription;
 }

@@ -1,35 +1,59 @@
-import connection from '../database';
-import { PaymentRequest, PaymentUpdate } from '../models/payment';
+import connection, { AppDataSource } from '../database';
+import { Payment, PaymentRequest, PaymentUpdate } from '../models/payment';
 import { v4 as uuidv4 } from 'uuid';
 
 export const fetchAllPayments = async () => {
-    const [rows] = await connection.query('SELECT * FROM payments');
-    return rows;
+    const paymentRepository = AppDataSource.getRepository(Payment);
+
+    const payments = await paymentRepository.find({
+        relations: ['subscription', 'subscription.plan', 'subscription.plan.service'],
+    });
+
+    return payments;
 }
 
 export const getPaymentBySubId = async (id: string) => {
-    const [rows] = await connection.query('SELECT * FROM payments WHERE subscribe_id = ?', [id])
-    return rows;
+    const paymentRepository = AppDataSource.getRepository(Payment);
+
+    const payments = await paymentRepository.find({
+        where: { subscription: { id: Number(id) } },
+        relations: ['subscription', 'subscription.plan', 'subscription.plan.service'],
+    });
+
+    return payments;
 }
 
 export const removePaymentBySubId = async (id: string) => {
-    await connection.query('DELETE * FROM payments WHERE subscribe_id = ?', [id]);
+    const paymentRepository = AppDataSource.getRepository(Payment);
+
+    await paymentRepository.delete({ subscription: { id: Number(id) } });
+
     return 'Payment deleted successfully';
 }
 
 export const createPayment = async (request: PaymentRequest) => {
-    const id = uuidv4();
-    const { amount, payment_date, state, subscribe_id } = request;
-    await connection.query('INSERT INTO payments (id,amount,payment_date,state,subscribe_id) VALUES (?,?,?,?,?)',
-        [id, amount, payment_date, state, subscribe_id]
-    );
+    const paymentRepository = AppDataSource.getRepository(Payment);
+
+    const payment = paymentRepository.create({
+        payment_date: new Date(request.payment_date),
+        state: request.state,
+        subscription: { id: request.subscribe_id },
+        amount: request.amount
+    });
+
+    await paymentRepository.save(payment);
+
     return 'Payment created correctly';
 }
 
 export const updateSubscription = async (id: string, request: PaymentUpdate) => {
-    const { payment_date, state, subscribe_id } = request;
-    await connection.query('UPDATE payments SET payment_date = ?, state = ?, subscribe_id = ? WHERE id = ?',
-        [payment_date, state, subscribe_id, id]
-    );
+    const paymentRepository = AppDataSource.getRepository(Payment);
+
+    await paymentRepository.update(id, {
+        payment_date: new Date(request.payment_date),
+        state: request.state,
+        subscription: { id: request.subscribe_id },
+    });
+
     return 'Payment updated successfully';
 }

@@ -5,6 +5,7 @@ import { Plan } from './models/plan';
 import { Service } from './models/services';
 import { User } from './models/user';
 import { Subscription } from './models/subscription';
+import { Payment } from './models/payment';
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: false,
     logging: true,
-    entities: [Plan, Service, User, Subscription],
+    entities: [Plan, Service, User, Subscription, Payment],
 });
 
 export const connection = mysql.createConnection({
