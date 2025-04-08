@@ -14,3 +14,20 @@ export const getPayment = async (req: Request, res: Response) => {
     }
     res.status(200).json(payment);
 }
+
+export const deletePaymentBySubId = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const message = await removePaymentBySubId(id);
+    res.status(200).json(message);
+}
+
+export const createNewSubscription = async (req: Request, res: Response) => {
+    const response = await createPayment(req.body);
+    res.status(200).json(response);
+}
+
+export const updateSubscriptionUsingId = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const response = await updateSubscription(id, req.body);
+    res.status(200).json(response);
+}
