@@ -1,64 +1,86 @@
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import { Request, Response } from "express";
-import connection from "../database";
+import connection, { AppDataSource } from "../database";
 import bcrypt from 'bcryptjs';
+import { User } from "../models/user";
 
 dotenv.config();
 
 const secretKey = process.env.SECRET_KEY as string;
 
-export const login = async (req: Request, res: Response) => {
+export const login = async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body;
 
     try {
-        const [rows]: any = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
+        const userRepository = AppDataSource.getRepository(User);
+        const user = await userRepository.findOne({ where: { email } });
 
-        if (rows.length === 0) {
+        if (!user) {
             res.status(401).json({ message: 'Invalid Email' });
+            return;
         }
-
-        const user = rows[0];
 
         const passwordIsValid = await bcrypt.compare(password, user.password);
 
         if (!passwordIsValid) {
             res.status(401).json({ message: 'Invalid Password' });
+            return;
         }
-
 
         const token = jwt.sign({ id: user.id, email: user.email }, secretKey, { expiresIn: '1h' });
 
-        res.json({ token });
+        const { password: _, ...userWithoutPassword } = user;
+
+        res.status(200).json({
+            token,
+            user: userWithoutPassword
+        });
 
     } catch (error) {
         console.error("Error logging in:", error);
         res.status(500).json({ message: 'Error logging in', error });
     }
-}
+};
 
-export const register = async (req: Request, res: Response) => {
+
+export const register = async (req: Request, res: Response): Promise<void> => {
     const { email, password, name } = req.body;
 
     try {
+        const userRepository = AppDataSource.getRepository(User);
 
-        const [existingUsers]: any = await connection.query('SELECT * FROM users WHERE email = ?', [email]);
-        if (existingUsers.length > 0) {
+        const existingUser = await userRepository.findOne({ where: { email } });
+
+        if (existingUser) {
             res.status(400).json({ message: 'Email already in Database' });
+            return;
         }
+
         const hashedPassword = await bcrypt.hash(password, 10);
-        const [result]: any = await connection.query(
-            'INSERT INTO users (email, password, name, rol) VALUES (?, ?, ?, ?)',
-            [email, hashedPassword, name, 'USER']
-        );
 
-        const userId = result.insertId;
+        const newUser = userRepository.create({
+            email,
+            name,
+            password: hashedPassword,
+            rol: 'USER'
+        });
 
-        const token = jwt.sign({ id: userId, email }, secretKey, { expiresIn: '1h' });
+        await userRepository.save(newUser);
 
-        res.status(201).json({ token });
+        const token = jwt.sign({ id: newUser.id, email: newUser.email }, secretKey, { expiresIn: '1h' });
+
+        // Devolver token + user (sin password)
+        const { password: _, ...userWithoutPassword } = newUser;
+
+        res.status(201).json({
+            token,
+            user: userWithoutPassword
+        });
+
     } catch (error) {
         console.error("Error registering user:", error);
         res.status(500).json({ message: 'Error registering user', error });
     }
-}
+};
+
