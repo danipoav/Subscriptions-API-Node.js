@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { connectDB } from "./database";
+import { AppDataSource, connectDB } from "./database";
 import authRouter from './routes/authRoutes'
 import protectedRoutes from './routes/protectedRoutes'
 
@@ -8,7 +8,11 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 
-connectDB();
+AppDataSource.initialize()
+  .then(() => {
+    console.log('Database connected 🚀');
+  })
+  .catch((error) => console.error('Error connecting to database', error));
 
 app.use(express.json());
 
@@ -29,6 +33,7 @@ app.use('/api', protectedRoutes);
 app.use('/', (req: Request, res: Response) => {
     res.json({ message: 'Welcome to my subscriptions API' });
 });
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

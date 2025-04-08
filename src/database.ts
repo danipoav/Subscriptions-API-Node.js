@@ -1,7 +1,22 @@
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
+import { DataSource } from 'typeorm';
+import { Plan } from './models/plan';
+import { Service } from './models/services';
 
 dotenv.config();
+
+export const AppDataSource = new DataSource({
+    type: 'mysql',
+    host: process.env.DB_HOST,
+    port: Number(process.env.DB_PORT),
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME,
+    synchronize: false,
+    logging: true,
+    entities: [Plan, Service],
+  });
 
 export const connection = mysql.createConnection({
   host: process.env.DB_HOST,

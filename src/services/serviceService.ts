@@ -1,7 +1,8 @@
-import connection from '../database';
+import connection, { AppDataSource } from '../database';
 import { Service } from '../models/services';
 
 export const fetchAllServices = async () => {
-    const [rows]: any = await connection.query('SELECT * FROM services');
-    return rows;
+    const serviceRepository = AppDataSource.getRepository(Service);
+    const services = await serviceRepository.find();
+    return services;
 }

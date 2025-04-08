@@ -1,16 +1,26 @@
-import connection from '../database';
+import connection, { AppDataSource } from '../database';
+import { Plan } from '../models/plan';
 
 export const fetchAllPlans = async () => {
-    const [rows]: any = await connection.query('SELECT * FROM plans');
-    return rows;
+    const planRepository = AppDataSource.getRepository(Plan);
+    const plans = await planRepository.find({
+        relations: ['service'],
+    });
+    return plans;
 }
 
 export const fetchPlanById = async (id: string) => {
-    const [rows]: any = await connection.query('SELECT * FROM plans WHERE id = ?', [id]);
-    return rows.length ? rows[0] : null;
+    const planRepository = AppDataSource.getRepository(Plan);
+    const plan = await planRepository.findOne({
+        where: { id: Number(id) },
+        relations: ['service'],
+    });
+
+    return plan;
 }
 
 export const removePlan = async (id: string) => {
-    await connection.query('DELETE FROM plans WHERE id = ?', [id]);
+    const planRepository = AppDataSource.getRepository(Plan);
+    await planRepository.delete(id);
     return 'Plan deleted successfully';
 }
