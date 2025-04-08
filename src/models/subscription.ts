@@ -1,3 +1,7 @@
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from "./user";
+import { Plan } from "./plan";
+
 export interface SubscriptionRequest {
     renewal_date: Date,
     start_date: Date,
@@ -7,4 +11,24 @@ export interface SubscriptionRequest {
 
 export interface Subscription extends SubscriptionRequest {
     id: number
+}
+
+@Entity('subscriptions')
+export class Subscription {
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    renewal_date: Date;
+
+    @Column()
+    start_date: Date;
+
+    @ManyToOne(() => Plan)
+    @JoinColumn({ name: 'plan_id' })
+    plan: Plan;
+
+    @ManyToOne(() => User)
+    @JoinColumn({ name: 'user_id' })
+    user: User;
 }

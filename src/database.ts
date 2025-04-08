@@ -4,6 +4,7 @@ import { DataSource } from 'typeorm';
 import { Plan } from './models/plan';
 import { Service } from './models/services';
 import { User } from './models/user';
+import { Subscription } from './models/subscription';
 
 dotenv.config();
 
@@ -16,7 +17,7 @@ export const AppDataSource = new DataSource({
     database: process.env.DB_NAME,
     synchronize: false,
     logging: true,
-    entities: [Plan, Service, User],
+    entities: [Plan, Service, User, Subscription],
 });
 
 export const connection = mysql.createConnection({

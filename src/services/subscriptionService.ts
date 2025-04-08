@@ -1,22 +1,35 @@
-import connection from '../database';
+import connection, { AppDataSource } from '../database';
 import { v4 as uuidv4 } from 'uuid';
-import { SubscriptionRequest } from '../models/subscription';
+import { Subscription, SubscriptionRequest } from '../models/subscription';
 
 export const fetchSubsByUserId = async (id: string) => {
-    const [rows]: any = await connection.query('SELECT * FROM subscriptions WHERE user_id = ?', [id]);
-    return rows;
+    const subscriptionRepository = AppDataSource.getRepository(Subscription);
+
+    const subscriptions = await subscriptionRepository.find({
+        where: { user: { id: Number(id) } },
+        relations: ['plan', 'user'],
+    });
+
+    return subscriptions;
 }
 
 export const removeSubsById = async (id: string) => {
-    await connection.query('DELETE * FROM subscriptions WHERE id = ?', [id]);
+    const subscriptionRepository = AppDataSource.getRepository(Subscription);
+    await subscriptionRepository.delete(id);
     return 'Subscription deleted successfully';
 }
 
 export const createSubscription = async (request: SubscriptionRequest) => {
-    const id = uuidv4();
-    const { renewal_date, start_date, plan_id, user_id } = request;
-    await connection.query('INSERT INTO subscriptions (id,renewal_date,start_date,plan_id,user_id) VALUES (?,?,?,?,?)',
-        [id, renewal_date, start_date, plan_id, user_id]
-    );
+    const subscriptionRepository = AppDataSource.getRepository(Subscription);
+
+    const subscription = subscriptionRepository.create({
+        renewal_date: new Date(request.renewal_date),
+        start_date: new Date(request.start_date),
+        plan: { id: Number(request.plan_id) },
+        user: { id: Number(request.user_id) },
+    });
+
+    await subscriptionRepository.save(subscription);
+
     return 'Subscription created successfully';
 }
