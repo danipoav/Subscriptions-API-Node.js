@@ -1,4 +1,4 @@
-import connection, { AppDataSource } from '../database';
+import { AppDataSource } from '../database';
 import { Plan } from '../models/plan';
 
 export const fetchAllPlans = async () => {
