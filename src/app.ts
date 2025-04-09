@@ -1,12 +1,13 @@
+import "reflect-metadata";
 import { Request, Response } from 'express';
-import { AppDataSource, connectDB } from "./database";
+import { AppDataSource } from "./database";
 import authRouter from './routes/authRoutes'
 import protectedRoutes from './routes/protectedRoutes'
-
 
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const serverless = require('serverless-http');
 
 AppDataSource.initialize()
   .then(() => {
@@ -18,10 +19,10 @@ app.use(express.json());
 
 //Restricciones de CORS para que solo permita solicitudes de mi dominio
 app.use(cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+  origin: 'http://localhost:5173',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
 //Ruta Autentificación para generar un token.
@@ -31,11 +32,13 @@ app.use('/api/auth', authRouter);
 app.use('/api', protectedRoutes);
 
 app.use('/', (req: Request, res: Response) => {
-    res.json({ message: 'Welcome to my subscriptions API' });
+  res.json({ message: 'Welcome to my subscriptions API' });
 });
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
-});
+// const PORT = process.env.PORT || 3000;
+// app.listen(PORT, () => {
+//     console.log(`http://localhost:${PORT}`)
+// });
+
+export const handler = serverless(app);

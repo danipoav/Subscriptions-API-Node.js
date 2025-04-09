@@ -13,13 +13,13 @@ export class Service {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ type: 'varchar' })
     name: string;
 
-    @Column()
+    @Column({ type: 'varchar' })
     description: string;
 
-    @Column()
+    @Column({ type: 'varchar' })
     logo: string;
 
     @OneToMany(() => Plan, (plan) => plan.service)

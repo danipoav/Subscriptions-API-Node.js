@@ -1,0 +1,21 @@
+org: danipoav
+app: api
+service: subscriptions-api
+
+provider:
+  name: aws
+  runtime: nodejs22.x
+  region: eu-west-3
+  stage: dev
+  environment:
+    SECRET_KEY: ${env:SECRET_KEY}
+    DB_HOST: ${env:DB_HOST}
+    DB_USER: ${env:DB_USER}
+    DB_PASSWORD: ${env:DB_PASSWORD}
+    DB_NAME: ${env:DB_NAME}
+
+functions:
+  api:
+    handler: src/app.handler
+    events:
+      - httpApi: "*"

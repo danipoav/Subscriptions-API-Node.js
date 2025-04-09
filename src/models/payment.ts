@@ -26,10 +26,10 @@ export class Payment {
     @Column('decimal', { precision: 10, scale: 2 })
     amount: number;
 
-    @Column()
+    @Column({ type: Date })
     payment_date: Date;
 
-    @Column()
+    @Column({ type: 'varchar' })
     state: 'Paid' | 'Pending';
 
     @ManyToOne(() => Subscription)

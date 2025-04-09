@@ -14,16 +14,16 @@ export class Plan {
     @PrimaryGeneratedColumn()
     id: number;
   
-    @Column()
+    @Column({ type: 'varchar' })
     name: string;
   
-    @Column()
+    @Column({ type: 'varchar' })
     period: '1 mes' | '1 año';
   
     @Column('decimal', { precision: 10, scale: 2 })
     price: number;
   
     @ManyToOne(() => Service, (service) => service.plans)
-    @JoinColumn({ name: 'service_id' }) // Este será el campo de la relación
+    @JoinColumn({ name: 'service_id' })
     service: Service;
   }

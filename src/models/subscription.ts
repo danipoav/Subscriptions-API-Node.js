@@ -18,10 +18,10 @@ export class Subscription {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column()
+    @Column({ type: Date })
     renewal_date: Date;
 
-    @Column()
+    @Column({ type: Date })
     start_date: Date;
 
     @ManyToOne(() => Plan)
