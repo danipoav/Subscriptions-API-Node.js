@@ -8,6 +8,7 @@ provider:
   region: eu-west-3
   stage: dev
   environment:
+    NODE_ENV: production
     SECRET_KEY: ${env:SECRET_KEY}
     DB_HOST: ${env:DB_HOST}
     DB_USER: ${env:DB_USER}

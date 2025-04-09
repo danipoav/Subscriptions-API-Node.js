@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import dotenv from 'dotenv';
 import { Request, Response } from "express";
-import connection, { AppDataSource } from "../database";
+import { AppDataSource } from "../database";
 import bcrypt from 'bcryptjs';
 import { User } from "../models/user";
 
@@ -11,7 +11,7 @@ const secretKey = process.env.SECRET_KEY as string;
 
 export const login = async (req: Request, res: Response): Promise<void> => {
     const { email, password } = req.body;
-
+    console.log(email, password)
     try {
         const userRepository = AppDataSource.getRepository(User);
         const user = await userRepository.findOne({ where: { email } });

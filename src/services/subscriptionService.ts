@@ -1,4 +1,4 @@
-import connection, { AppDataSource } from '../database';
+import { AppDataSource } from '../database';
 import { Subscription, SubscriptionRequest } from '../models/subscription';
 
 export const fetchSubsByUserId = async (id: string) => {

@@ -91,7 +91,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-          "S3Key": "serverless/subscriptions-api/dev/1744202693208-2025-04-09T12:44:53.208Z/subscriptions-api.zip"
+          "S3Key": "serverless/subscriptions-api/dev/1744213121931-2025-04-09T15:38:41.931Z/subscriptions-api.zip"
         },
         "Handler": "src/app.handler",
         "Runtime": "nodejs22.x",
@@ -100,11 +100,12 @@
         "Timeout": 6,
         "Environment": {
           "Variables": {
+            "NODE_ENV": "production",
             "SECRET_KEY": "admin",
-            "DB_HOST": "localhost",
-            "DB_USER": "Dani",
-            "DB_PASSWORD": "Dani",
-            "DB_NAME": "subscriptions_db",
+            "DB_HOST": "database-1.cz64qema676d.eu-west-3.rds.amazonaws.com",
+            "DB_USER": "admin",
+            "DB_PASSWORD": "Deluxogta5",
+            "DB_NAME": "subs",
             "NODE_OPTIONS": "--enable-source-maps"
           }
         },
@@ -119,14 +120,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionoie4IcGPCtUFGBKkStzuxTp2zsYTQtd3ym0V2VG8": {
+    "ApiLambdaVersionk7A7LsKDVPgQwCxMlLevwa76oSR48AEoUmjsh26tJI": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "ssWiLNMbOaY5/TDncTcVeSGa6yfrqspd77XIPGN7tMk="
+        "CodeSha256": "qcM0nlGH8RqVQDwmY9tM8JLshIM1OCMcolPv1jQzWMo="
       }
     },
     "HttpApi": {
@@ -235,7 +236,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionoie4IcGPCtUFGBKkStzuxTp2zsYTQtd3ym0V2VG8"
+        "Ref": "ApiLambdaVersionk7A7LsKDVPgQwCxMlLevwa76oSR48AEoUmjsh26tJI"
       },
       "Export": {
         "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"

@@ -1,4 +1,4 @@
-import connection, { AppDataSource } from '../database';
+import { AppDataSource } from '../database';
 import { Payment, PaymentRequest, PaymentUpdate } from '../models/payment';
 import { v4 as uuidv4 } from 'uuid';
 

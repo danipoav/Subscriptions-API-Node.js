@@ -16,7 +16,7 @@ export class Service {
     @Column({ type: 'varchar' })
     name: string;
 
-    @Column({ type: 'varchar' })
+    @Column({ type: 'text' })
     description: string;
 
     @Column({ type: 'varchar' })
