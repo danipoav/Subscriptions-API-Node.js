@@ -77,7 +77,6 @@ const register = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         });
         yield userRepository.save(newUser);
         const token = jsonwebtoken_1.default.sign({ id: newUser.id, email: newUser.email }, secretKey, { expiresIn: '1h' });
-        // Devolver token + user (sin password)
         const { password: _ } = newUser, userWithoutPassword = __rest(newUser, ["password"]);
         res.status(201).json({
             token,

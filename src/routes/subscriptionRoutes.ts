@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { getSubscriptionByUserId, deleteSubById, createSubscriptionController } from "../controllers/subscriptionController";
+import { authenticateToken } from "../middleware/auth";
 
 const router = Router();
-
+router.use(authenticateToken)
 router.get('/:id', getSubscriptionByUserId);
 router.delete('/:id', deleteSubById);
 router.post('/', createSubscriptionController);

@@ -41,4 +41,15 @@ app.use('/', (req: Request, res: Response) => {
 //     console.log(`http://localhost:${PORT}`)
 // });
 
-export const handler = serverless(app);
+export const handler = serverless(app, {
+  request: (request: any, event: { body?: string }) => {
+    if (event.body && typeof event.body === 'string') {
+      try {
+        request.body = JSON.parse(event.body);
+      } catch (err) {
+        console.error('Error parsing body', err);
+      }
+    }
+    return request;
+  }
+});

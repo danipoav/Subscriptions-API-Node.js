@@ -2,7 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const subscriptionController_1 = require("../controllers/subscriptionController");
+const auth_1 = require("../middleware/auth");
 const router = (0, express_1.Router)();
+router.use(auth_1.authenticateToken);
 router.get('/:id', subscriptionController_1.getSubscriptionByUserId);
 router.delete('/:id', subscriptionController_1.deleteSubById);
 router.post('/', subscriptionController_1.createSubscriptionController);

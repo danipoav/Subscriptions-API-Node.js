@@ -70,7 +70,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
         const token = jwt.sign({ id: newUser.id, email: newUser.email }, secretKey, { expiresIn: '1h' });
 
-        // Devolver token + user (sin password)
         const { password: _, ...userWithoutPassword } = newUser;
 
         res.status(201).json({
