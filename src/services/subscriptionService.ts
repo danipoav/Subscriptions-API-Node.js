@@ -9,7 +9,23 @@ export const fetchSubsByUserId = async (id: string) => {
         relations: ['plan', 'plan.service', 'user'],
     });
 
-    return subscriptions;
+    const now = new Date();
+
+    for (const sub of subscriptions) {
+        const renewalDate = new Date(sub.renewal_date);
+
+        if (renewalDate.getTime() < now.getTime()) {
+            console.log(`Eliminando suscripción expirada con ID: ${sub.id}`);
+            await subscriptionRepository.delete(sub.id);
+        }
+    }
+
+    const activeSubscriptions = subscriptions.filter(sub => {
+        const renewalDate = new Date(sub.renewal_date);
+        return renewalDate.getTime() > now.getTime();
+    });
+
+    return activeSubscriptions;
 }
 
 export const removeSubsById = async (id: string) => {
