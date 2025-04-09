@@ -91,9 +91,9 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-          "S3Key": "serverless/subscriptions-api/dev/1744213121931-2025-04-09T15:38:41.931Z/subscriptions-api.zip"
+          "S3Key": "serverless/subscriptions-api/dev/1744215811669-2025-04-09T16:23:31.669Z/subscriptions-api.zip"
         },
-        "Handler": "src/app.handler",
+        "Handler": "dist/app.handler",
         "Runtime": "nodejs22.x",
         "FunctionName": "subscriptions-api-dev-api",
         "MemorySize": 1024,
@@ -105,8 +105,7 @@
             "DB_HOST": "database-1.cz64qema676d.eu-west-3.rds.amazonaws.com",
             "DB_USER": "admin",
             "DB_PASSWORD": "Deluxogta5",
-            "DB_NAME": "subs",
-            "NODE_OPTIONS": "--enable-source-maps"
+            "DB_NAME": "subs"
           }
         },
         "Role": {
@@ -120,14 +119,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionk7A7LsKDVPgQwCxMlLevwa76oSR48AEoUmjsh26tJI": {
+    "ApiLambdaVersion2TgKhluhtDCwAfkz0Mnabtr6mVo0Nk0rC71RyH83lA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "qcM0nlGH8RqVQDwmY9tM8JLshIM1OCMcolPv1jQzWMo="
+        "CodeSha256": "hA2ugt9xi5BmvXVOfuCdU/zbLU/XruaX37L8EFm17Gc="
       }
     },
     "HttpApi": {
@@ -236,7 +235,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionk7A7LsKDVPgQwCxMlLevwa76oSR48AEoUmjsh26tJI"
+        "Ref": "ApiLambdaVersion2TgKhluhtDCwAfkz0Mnabtr6mVo0Nk0rC71RyH83lA"
       },
       "Export": {
         "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"

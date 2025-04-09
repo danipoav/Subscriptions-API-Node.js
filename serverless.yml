@@ -17,6 +17,10 @@ provider:
 
 functions:
   api:
-    handler: src/app.handler
+    handler: dist/app.handler
     events:
       - httpApi: "*"
+
+package:
+  include:
+    - dist/**

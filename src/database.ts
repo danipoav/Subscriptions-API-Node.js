@@ -1,10 +1,5 @@
 import dotenv from 'dotenv';
 import { DataSource } from 'typeorm';
-import { Plan } from './models/plan';
-import { Service } from './models/services';
-import { User } from './models/user';
-import { Subscription } from './models/subscription';
-import { Payment } from './models/payment';
 
 dotenv.config();
 

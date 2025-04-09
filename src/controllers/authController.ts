@@ -53,7 +53,7 @@ export const register = async (req: Request, res: Response): Promise<void> => {
         const existingUser = await userRepository.findOne({ where: { email } });
 
         if (existingUser) {
-            res.status(400).json({ message: 'Email already in Database' });
+            res.status(400).json({ message: `Email already in database ${email} ${req.body}` });
             return;
         }
 
