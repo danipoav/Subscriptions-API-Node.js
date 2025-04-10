@@ -111,7 +111,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-                "S3Key": "serverless/subscriptions-api/dev/1744227212300-2025-04-09T19:33:32.300Z/subscriptions-api.zip"
+                "S3Key": "serverless/subscriptions-api/dev/1744271037009-2025-04-10T07:43:57.009Z/subscriptions-api.zip"
               },
               "Handler": "dist/app.handler",
               "Runtime": "nodejs22.x",
@@ -139,14 +139,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionukrEuNdE8FH89cgBtdE73ExJvpsaAfwHP2ohIEKecCg": {
+          "ApiLambdaVersionE6e57BsquaRu3VfRS4ByZigJIh5RzcU0qUEVv1Ar1U": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "UWiqp/ReACLwJMUYQo5tHMSCYlZaFY97WSXZYZW50aM="
+              "CodeSha256": "SSfR/B8FVwiMMX1VIVsNo2Q/uvJSoip/6tJcIdDKeQY="
             }
           },
           "HttpApi": {
@@ -252,7 +252,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionukrEuNdE8FH89cgBtdE73ExJvpsaAfwHP2ohIEKecCg"
+              "Ref": "ApiLambdaVersionE6e57BsquaRu3VfRS4ByZigJIh5RzcU0qUEVv1Ar1U"
             },
             "Export": {
               "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -312,7 +312,7 @@
         "timeout": 6,
         "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionukrEuNdE8FH89cgBtdE73ExJvpsaAfwHP2ohIEKecCg"
+        "versionLogicalId": "ApiLambdaVersionE6e57BsquaRu3VfRS4ByZigJIh5RzcU0qUEVv1Ar1U"
       }
     },
     "configValidationMode": "warn",
@@ -334,7 +334,7 @@
         "artifactsS3KeyDirname": "serverless/subscriptions-api/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
         "artifact": "C:\\Users\\Danipoav\\OneDrive\\Documentos\\Java-Spring\\api-subs-node\\.serverless\\subscriptions-api.zip",
-        "artifactDirectoryName": "serverless/subscriptions-api/dev/1744227212300-2025-04-09T19:33:32.300Z"
+        "artifactDirectoryName": "serverless/subscriptions-api/dev/1744271037009-2025-04-10T07:43:57.009Z"
       }
     },
     "app": "api",
@@ -345,7 +345,7 @@
     "artifact": "C:\\Users\\Danipoav\\OneDrive\\Documentos\\Java-Spring\\api-subs-node\\.serverless\\subscriptions-api.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/subscriptions-api/dev/1744227212300-2025-04-09T19:33:32.300Z",
+    "artifactDirectoryName": "serverless/subscriptions-api/dev/1744271037009-2025-04-10T07:43:57.009Z",
     "artifact": "subscriptions-api.zip"
   }
 }

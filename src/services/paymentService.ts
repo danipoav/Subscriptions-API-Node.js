@@ -1,6 +1,5 @@
 import { AppDataSource } from '../database';
 import { Payment, PaymentRequest, PaymentUpdate } from '../models/payment';
-import { v4 as uuidv4 } from 'uuid';
 
 export const fetchAllPayments = async () => {
     const paymentRepository = AppDataSource.getRepository(Payment);

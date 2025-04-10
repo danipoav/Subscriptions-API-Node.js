@@ -9,12 +9,6 @@ const app = express();
 const cors = require('cors');
 const serverless = require('serverless-http');
 
-AppDataSource.initialize()
-  .then(() => {
-    console.log('Database connected 🚀');
-  })
-  .catch((error) => console.error('Error connecting to database', error));
-
 app.use(express.json());
 
 //Restricciones de CORS para que solo permita solicitudes de mi dominio
@@ -24,6 +18,20 @@ app.use(cors({
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+//Inicializar DataSource en cada peticion
+app.use(async (req: any, res: any, next: any) => {
+  if (!AppDataSource.isInitialized) {
+    try {
+      await AppDataSource.initialize();
+      console.log('Database initialized ✅');
+    } catch (error) {
+      console.error('Database initialization error ❌', error);
+      return res.status(500).json({ message: 'Database connection error' });
+    }
+  }
+  next();
+});
 
 //Ruta Autentificación para generar un token.
 app.use('/api/auth', authRouter);
