@@ -3,9 +3,9 @@ import { Plan } from "./plan";
 
 export interface Service {
     id: number,
-    despcription: string,
+    description: string,
     logo: string,
-    name: string
+    name: string,
 }
 
 @Entity('services')

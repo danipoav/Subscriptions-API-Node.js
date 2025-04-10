@@ -38,7 +38,7 @@ app.use((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
         }
         catch (error) {
             console.error('Database initialization error ❌', error);
-            return res.status(500).json({ message: 'Database connection error' });
+            return res.status(500).json({ message: 'Database connection error', error });
         }
     }
     next();

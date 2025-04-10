@@ -27,7 +27,7 @@ app.use(async (req: any, res: any, next: any) => {
       console.log('Database initialized ✅');
     } catch (error) {
       console.error('Database initialization error ❌', error);
-      return res.status(500).json({ message: 'Database connection error' });
+      return res.status(500).json({ message: 'Database connection error', error });
     }
   }
   next();

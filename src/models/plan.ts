@@ -6,7 +6,7 @@ export interface Plan {
     name: string,
     period: '1 mes' | '1 año',
     price: number,
-    service_id: number
+    service_id: Service
 }
 
 @Entity('plans')
