@@ -10,6 +10,7 @@ const user_1 = require("./models/user");
 const services_1 = require("./models/services");
 const plan_1 = require("./models/plan");
 const subscription_1 = require("./models/subscription");
+const payment_1 = require("./models/payment");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: 'mysql',
@@ -20,5 +21,5 @@ exports.AppDataSource = new typeorm_1.DataSource({
     database: process.env.DB_NAME,
     synchronize: false,
     logging: true,
-    entities: [user_1.User, services_1.Service, plan_1.Plan, subscription_1.Subscription]
+    entities: [user_1.User, services_1.Service, plan_1.Plan, subscription_1.Subscription, payment_1.Payment]
 });

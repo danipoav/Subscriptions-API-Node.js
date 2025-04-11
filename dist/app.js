@@ -50,10 +50,10 @@ app.use('/api', protectedRoutes_1.default);
 app.use('/', (req, res) => {
     res.json({ message: 'Welcome to my subscriptions API' });
 });
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`http://localhost:${PORT}`)
-// });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`);
+});
 exports.handler = serverless(app, {
     request: (request, event) => {
         if (event.body && typeof event.body === 'string') {
