@@ -1,5 +1,6 @@
 import { AppDataSource } from '../database';
-import { Payment, PaymentRequest, PaymentUpdate } from '../models/payment';
+import { PaymentRequest, PaymentUpdate } from '../interface/paymentInterface';
+import { Payment, } from '../models/payment';
 
 export const fetchAllPayments = async () => {
     const paymentRepository = AppDataSource.getRepository(Payment);

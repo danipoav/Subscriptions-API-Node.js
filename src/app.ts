@@ -44,10 +44,10 @@ app.use('/', (req: Request, res: Response) => {
 });
 
 
-// const PORT = process.env.PORT || 3000;
-// app.listen(PORT, () => {
-//     console.log(`http://localhost:${PORT}`)
-// });
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`http://localhost:${PORT}`)
+});
 
 export const handler = serverless(app, {
   request: (request: any, event: { body?: string }) => {

@@ -1,5 +1,4 @@
 import { Router } from "express";
-import { authenticateToken } from "../middleware/auth";
 import planRoute from './planRoutes';
 import subsRoute from './subscriptionRoutes';
 import paymentRoute from './paymentRoutes';
