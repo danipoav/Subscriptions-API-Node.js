@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSubscription = exports.removeSubsById = exports.fetchSubsByUserId = void 0;
+exports.updateSubscriptionById = exports.createSubscription = exports.removeSubsById = exports.fetchSubsByUserId = void 0;
 const database_1 = require("../database");
 const subscription_1 = require("../models/subscription");
 const fetchSubsByUserId = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -51,3 +51,11 @@ const createSubscription = (request) => __awaiter(void 0, void 0, void 0, functi
     return subscription;
 });
 exports.createSubscription = createSubscription;
+const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0, function* () {
+    const subscriptionRepository = database_1.AppDataSource.getRepository(subscription_1.Subscription);
+    yield subscriptionRepository.update(id, {
+        plan: { id: Number(request.plan_id) }
+    });
+    return 'Subscription updated successfully';
+});
+exports.updateSubscriptionById = updateSubscriptionById;

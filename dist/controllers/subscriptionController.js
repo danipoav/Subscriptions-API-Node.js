@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createSubscriptionController = exports.deleteSubById = exports.getSubscriptionByUserId = void 0;
+exports.updateSubs = exports.createSubscriptionController = exports.deleteSubById = exports.getSubscriptionByUserId = void 0;
 const subscriptionService_1 = require("../services/subscriptionService");
 const getSubscriptionByUserId = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
@@ -31,3 +31,9 @@ const createSubscriptionController = (req, res) => __awaiter(void 0, void 0, voi
     res.status(200).json(message);
 });
 exports.createSubscriptionController = createSubscriptionController;
+const updateSubs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    const message = (0, subscriptionService_1.updateSubscriptionById)(id, req.body);
+    res.status(200).json(message);
+});
+exports.updateSubs = updateSubs;

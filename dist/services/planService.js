@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removePlan = exports.fetchPlanById = exports.fetchAllPlans = void 0;
+exports.updatePlan = exports.removePlan = exports.fetchPlanById = exports.fetchAllPlans = void 0;
 const database_1 = require("../database");
 const plan_1 = require("../models/plan");
 const fetchAllPlans = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -35,3 +35,13 @@ const removePlan = (id) => __awaiter(void 0, void 0, void 0, function* () {
     return 'Plan deleted successfully';
 });
 exports.removePlan = removePlan;
+const updatePlan = (id, request) => __awaiter(void 0, void 0, void 0, function* () {
+    const planRepository = database_1.AppDataSource.getRepository(plan_1.Plan);
+    yield planRepository.update(id, {
+        name: request.name,
+        period: request.period,
+        price: request.price,
+    });
+    return 'Plan updated successfully';
+});
+exports.updatePlan = updatePlan;

@@ -8,4 +8,5 @@ router.get('/:id', subscriptionController_1.getSubscriptionByUserId);
 router.use(auth_1.authenticateToken);
 router.delete('/:id', subscriptionController_1.deleteSubById);
 router.post('/', subscriptionController_1.createSubscriptionController);
+router.put('/:id', subscriptionController_1.updateSubs);
 exports.default = router;
