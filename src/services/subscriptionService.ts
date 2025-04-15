@@ -53,7 +53,7 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
     const subscriptionRepository = AppDataSource.getRepository(Subscription);
 
     await subscriptionRepository.update(id, {
-        plan_id: request.plan_id
+        plan: { id: Number(request.plan_id) }
     })
 
     return 'Subscription updated successfully';

@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { fetchSubsByUserId, removeSubsById, createSubscription } from "../services/subscriptionService";
+import { fetchSubsByUserId, removeSubsById, createSubscription, updateSubscriptionById } from "../services/subscriptionService";
 
 export const getSubscriptionByUserId = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -18,5 +18,11 @@ export const deleteSubById = async (req: Request, res: Response) => {
 
 export const createSubscriptionController = async (req: Request, res: Response) => {
     const message = await createSubscription(req.body);
+    res.status(200).json(message);
+}
+
+export const updateSubs = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const message = updateSubscriptionById(id, req.body);
     res.status(200).json(message);
 }
