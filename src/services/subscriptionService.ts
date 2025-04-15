@@ -1,5 +1,5 @@
 import { AppDataSource } from '../database';
-import { Subscription, SubscriptionRequest } from '../models/subscription';
+import { Subscription, SubscriptionRequest, SubscriptionUpdate } from '../models/subscription';
 
 export const fetchSubsByUserId = async (id: string) => {
     const subscriptionRepository = AppDataSource.getRepository(Subscription);
@@ -47,4 +47,14 @@ export const createSubscription = async (request: SubscriptionRequest) => {
     await subscriptionRepository.save(subscription);
 
     return subscription;
+}
+
+export const updateSubscriptionById = async (id: string, request: SubscriptionUpdate) => {
+    const subscriptionRepository = AppDataSource.getRepository(Subscription);
+
+    await subscriptionRepository.update(id, {
+        plan_id: request.plan_id
+    })
+
+    return 'Subscription updated successfully';
 }

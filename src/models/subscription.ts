@@ -8,6 +8,9 @@ export interface SubscriptionRequest {
     plan_id: string,
     user_id: string
 }
+export interface SubscriptionUpdate {
+    plan_id: string
+}
 
 export interface Subscription extends SubscriptionRequest {
     id: number
