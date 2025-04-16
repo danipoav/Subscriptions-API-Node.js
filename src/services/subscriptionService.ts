@@ -1,4 +1,5 @@
 import { AppDataSource } from '../database';
+import { Plan } from '../models/plan';
 import { Subscription, SubscriptionRequest, SubscriptionUpdate } from '../models/subscription';
 
 export const fetchSubsByUserId = async (id: string) => {
@@ -51,10 +52,26 @@ export const createSubscription = async (request: SubscriptionRequest) => {
 
 export const updateSubscriptionById = async (id: string, request: SubscriptionUpdate) => {
     const subscriptionRepository = AppDataSource.getRepository(Subscription);
+    const planRepository = AppDataSource.getRepository(Plan);
 
-    await subscriptionRepository.update(id, {
-        plan: { id: Number(request.plan_id) }
-    })
+    const subscription = await subscriptionRepository.findOne({
+        where: { id: Number(id) },
+        relations: ['plan'],
+    });
+
+    if (!subscription) throw new Error('Subscription not found');
+
+    const newPlan = await planRepository.findOneBy({ id: Number(request.plan_id) });
+    if (!newPlan) throw new Error('Plan not found');
+
+    subscription.plan = newPlan;
+
+    const now = new Date();
+    subscription.renewal_date = newPlan.period === '1 año'
+        ? new Date(now.setFullYear(now.getFullYear() + 1))
+        : new Date(now.setMonth(now.getMonth() + 1));
+
+    await subscriptionRepository.save(subscription);
 
     return 'Subscription updated successfully';
 }
