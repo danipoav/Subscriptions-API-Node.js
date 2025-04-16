@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateSubscriptionById = exports.createSubscription = exports.removeSubsById = exports.fetchSubsByUserId = void 0;
 const database_1 = require("../database");
+const plan_1 = require("../models/plan");
 const subscription_1 = require("../models/subscription");
 const fetchSubsByUserId = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const subscriptionRepository = database_1.AppDataSource.getRepository(subscription_1.Subscription);
@@ -53,9 +54,22 @@ const createSubscription = (request) => __awaiter(void 0, void 0, void 0, functi
 exports.createSubscription = createSubscription;
 const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0, function* () {
     const subscriptionRepository = database_1.AppDataSource.getRepository(subscription_1.Subscription);
-    yield subscriptionRepository.update(id, {
-        plan: { id: Number(request.plan_id) }
+    const planRepository = database_1.AppDataSource.getRepository(plan_1.Plan);
+    const subscription = yield subscriptionRepository.findOne({
+        where: { id: Number(id) },
+        relations: ['plan'],
     });
+    if (!subscription)
+        throw new Error('Subscription not found');
+    const newPlan = yield planRepository.findOneBy({ id: Number(request.plan_id) });
+    if (!newPlan)
+        throw new Error('Plan not found');
+    subscription.plan = newPlan;
+    const now = new Date();
+    subscription.renewal_date = newPlan.period === '1 año'
+        ? new Date(now.setFullYear(now.getFullYear() + 1))
+        : new Date(now.setMonth(now.getMonth() + 1));
+    yield subscriptionRepository.save(subscription);
     return 'Subscription updated successfully';
 });
 exports.updateSubscriptionById = updateSubscriptionById;
