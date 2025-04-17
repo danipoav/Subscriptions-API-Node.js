@@ -33,7 +33,7 @@ const createSubscriptionController = (req, res) => __awaiter(void 0, void 0, voi
 exports.createSubscriptionController = createSubscriptionController;
 const updateSubs = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { id } = req.params;
-    const message = (0, subscriptionService_1.updateSubscriptionById)(id, req.body);
+    const message = yield (0, subscriptionService_1.updateSubscriptionById)(id, req.body);
     res.status(200).json(message);
 });
 exports.updateSubs = updateSubs;

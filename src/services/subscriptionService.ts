@@ -56,7 +56,7 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
 
     const subscription = await subscriptionRepository.findOne({
         where: { id: Number(id) },
-        relations: ['plan'],
+        relations: ['plan', 'plan.service', 'user'],
     });
 
     if (!subscription) throw new Error('Subscription not found');

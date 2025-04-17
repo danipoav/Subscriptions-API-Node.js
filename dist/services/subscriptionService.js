@@ -70,6 +70,6 @@ const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0
         ? new Date(now.setFullYear(now.getFullYear() + 1))
         : new Date(now.setMonth(now.getMonth() + 1));
     yield subscriptionRepository.save(subscription);
-    return 'Subscription updated successfully';
+    return subscription;
 });
 exports.updateSubscriptionById = updateSubscriptionById;
