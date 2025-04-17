@@ -56,7 +56,7 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
 
     const subscription = await subscriptionRepository.findOne({
         where: { id: Number(id) },
-        relations: ['plan', 'plan.service', 'user'],
+        relations: ['plan', 'user'],
     });
 
     if (!subscription) throw new Error('Subscription not found');
@@ -73,5 +73,13 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
 
     await subscriptionRepository.save(subscription);
 
-    return subscription;
+    const updatedSub = await subscriptionRepository
+        .createQueryBuilder('subscription')
+        .leftJoinAndSelect('subscription.plan', 'plan')
+        .leftJoinAndSelect('plan.service', 'service')
+        .leftJoinAndSelect('subscription.user', 'user')
+        .where('subscription.id = :id', { id: Number(id) })
+        .getOne();
+
+    return updatedSub;
 }

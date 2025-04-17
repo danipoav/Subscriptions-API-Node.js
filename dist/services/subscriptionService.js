@@ -57,7 +57,7 @@ const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0
     const planRepository = database_1.AppDataSource.getRepository(plan_1.Plan);
     const subscription = yield subscriptionRepository.findOne({
         where: { id: Number(id) },
-        relations: ['plan'],
+        relations: ['plan', 'plan.service', 'user'],
     });
     if (!subscription)
         throw new Error('Subscription not found');
