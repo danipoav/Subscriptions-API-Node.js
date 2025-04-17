@@ -73,5 +73,5 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
 
     await subscriptionRepository.save(subscription);
 
-    return 'Subscription updated successfully';
+    return subscription;
 }
