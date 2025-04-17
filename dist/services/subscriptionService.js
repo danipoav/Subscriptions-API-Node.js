@@ -57,7 +57,7 @@ const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0
     const planRepository = database_1.AppDataSource.getRepository(plan_1.Plan);
     const subscription = yield subscriptionRepository.findOne({
         where: { id: Number(id) },
-        relations: ['plan', 'plan.service', 'user'],
+        relations: ['plan', 'user'],
     });
     if (!subscription)
         throw new Error('Subscription not found');
@@ -70,6 +70,13 @@ const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0
         ? new Date(now.setFullYear(now.getFullYear() + 1))
         : new Date(now.setMonth(now.getMonth() + 1));
     yield subscriptionRepository.save(subscription);
-    return subscription;
+    const updatedSub = yield subscriptionRepository
+        .createQueryBuilder('subscription')
+        .leftJoinAndSelect('subscription.plan', 'plan')
+        .leftJoinAndSelect('plan.service', 'service')
+        .leftJoinAndSelect('subscription.user', 'user')
+        .where('subscription.id = :id', { id: Number(id) })
+        .getOne();
+    return updatedSub;
 });
 exports.updateSubscriptionById = updateSubscriptionById;
