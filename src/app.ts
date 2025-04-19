@@ -13,7 +13,7 @@ app.use(express.json());
 
 //Restricciones de CORS para que solo permita solicitudes de mi dominio
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: 'http://subs-page.s3-website.eu-west-3.amazonaws.com/',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
@@ -46,7 +46,7 @@ app.use('/', (req: Request, res: Response) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`)
+  console.log(`http://localhost:${PORT}`)
 });
 
 export const handler = serverless(app, {
