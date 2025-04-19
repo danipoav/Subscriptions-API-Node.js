@@ -12,7 +12,7 @@ export class Payment {
     amount: number;
 
     @Column({ type: Date })
-    payment_date: Date;
+    payment_date: Date | null;
 
     @Column({ type: 'varchar' })
     state: 'Paid' | 'Pending';

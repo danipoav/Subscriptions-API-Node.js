@@ -1,4 +1,5 @@
 import { AppDataSource } from '../database';
+import { Payment } from '../models/payment';
 import { Plan } from '../models/plan';
 import { Subscription, SubscriptionRequest, SubscriptionUpdate } from '../models/subscription';
 
@@ -53,6 +54,7 @@ export const createSubscription = async (request: SubscriptionRequest) => {
 export const updateSubscriptionById = async (id: string, request: SubscriptionUpdate) => {
     const subscriptionRepository = AppDataSource.getRepository(Subscription);
     const planRepository = AppDataSource.getRepository(Plan);
+    const paymentRepository = AppDataSource.getRepository(Payment);
 
     const subscription = await subscriptionRepository.findOne({
         where: { id: Number(id) },
@@ -72,6 +74,14 @@ export const updateSubscriptionById = async (id: string, request: SubscriptionUp
         : new Date(now.setMonth(now.getMonth() + 1));
 
     await subscriptionRepository.save(subscription);
+
+    const payment = await paymentRepository.findOne({ where: { subscription: { id: subscription.id } } });
+    if (payment) {
+        payment.amount = newPlan.price;
+        payment.state = 'Pending';
+        payment.payment_date = null;
+        await paymentRepository.save(payment);
+    }
 
     const updatedSub = await subscriptionRepository
         .createQueryBuilder('subscription')
