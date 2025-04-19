@@ -114,7 +114,7 @@
               "Properties": {
                 "Code": {
                   "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-                  "S3Key": "serverless/subscriptions-api/dev/1745102297022-2025-04-19T22:38:17.022Z/subscriptions-api.zip"
+                  "S3Key": "serverless/subscriptions-api/dev/1745102458600-2025-04-19T22:40:58.600Z/subscriptions-api.zip"
                 },
                 "Handler": "dist/app.handler",
                 "Runtime": "nodejs22.x",
@@ -142,14 +142,14 @@
                 "ApiLogGroup"
               ]
             },
-            "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0": {
+            "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8": {
               "Type": "AWS::Lambda::Version",
               "DeletionPolicy": "Retain",
               "Properties": {
                 "FunctionName": {
                   "Ref": "ApiLambdaFunction"
                 },
-                "CodeSha256": "YOSZwtgG0haYoyow+IxxGtDDHwd4+6+3FLigKlOLbdU="
+                "CodeSha256": "5YvPutpuSZNvykNMXCD4dXLtP+gTl60qvUPWVddHpOc="
               }
             },
             "HttpApi": {
@@ -258,7 +258,7 @@
             "ApiLambdaFunctionQualifiedArn": {
               "Description": "Current Lambda function version",
               "Value": {
-                "Ref": "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0"
+                "Ref": "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8"
               },
               "Export": {
                 "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -317,7 +317,7 @@
           "timeout": 6,
           "runtime": "nodejs22.x",
           "vpc": {},
-          "versionLogicalId": "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0"
+          "versionLogicalId": "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8"
         }
       },
       "package": {
@@ -327,7 +327,7 @@
         "artifactsS3KeyDirname": "serverless/subscriptions-api/dev/code-artifacts",
         "deploymentBucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
         "artifact": "C:\\Users\\Danipoav\\OneDrive\\Documentos\\Java-Spring\\api-subs-node\\.serverless\\subscriptions-api.zip",
-        "artifactDirectoryName": "serverless/subscriptions-api/dev/1745102297022-2025-04-19T22:38:17.022Z"
+        "artifactDirectoryName": "serverless/subscriptions-api/dev/1745102458600-2025-04-19T22:40:58.600Z"
       }
     },
     "provider": {
@@ -437,7 +437,7 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-                "S3Key": "serverless/subscriptions-api/dev/1745102297022-2025-04-19T22:38:17.022Z/subscriptions-api.zip"
+                "S3Key": "serverless/subscriptions-api/dev/1745102458600-2025-04-19T22:40:58.600Z/subscriptions-api.zip"
               },
               "Handler": "dist/app.handler",
               "Runtime": "nodejs22.x",
@@ -465,14 +465,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0": {
+          "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "YOSZwtgG0haYoyow+IxxGtDDHwd4+6+3FLigKlOLbdU="
+              "CodeSha256": "5YvPutpuSZNvykNMXCD4dXLtP+gTl60qvUPWVddHpOc="
             }
           },
           "HttpApi": {
@@ -581,7 +581,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0"
+              "Ref": "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8"
             },
             "Export": {
               "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
@@ -657,12 +657,12 @@
     "serviceProviderAwsCfStackName": "subscriptions-api-dev",
     "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-west-3:890742603610:stack/subscriptions-api-dev/99b08e30-10c2-11f0-9ab9-0ae6f2706407",
     "serviceProviderAwsCfStackCreated": "2025-04-03T19:34:03.772Z",
-    "serviceProviderAwsCfStackUpdated": "2025-04-19T20:36:20.415Z",
+    "serviceProviderAwsCfStackUpdated": "2025-04-19T22:38:22.587Z",
     "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
     "serviceProviderAwsCfStackOutputs": [
       {
         "OutputKey": "ApiLambdaFunctionQualifiedArn",
-        "OutputValue": "arn:aws:lambda:eu-west-3:890742603610:function:subscriptions-api-dev-api:50",
+        "OutputValue": "arn:aws:lambda:eu-west-3:890742603610:function:subscriptions-api-dev-api:51",
         "Description": "Current Lambda function version",
         "ExportName": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
       },
@@ -777,7 +777,7 @@
           "Properties": {
             "Code": {
               "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-              "S3Key": "serverless/subscriptions-api/dev/1745102297022-2025-04-19T22:38:17.022Z/subscriptions-api.zip"
+              "S3Key": "serverless/subscriptions-api/dev/1745102458600-2025-04-19T22:40:58.600Z/subscriptions-api.zip"
             },
             "Handler": "dist/app.handler",
             "Runtime": "nodejs22.x",
@@ -805,14 +805,14 @@
             "ApiLogGroup"
           ]
         },
-        "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0": {
+        "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8": {
           "Type": "AWS::Lambda::Version",
           "DeletionPolicy": "Retain",
           "Properties": {
             "FunctionName": {
               "Ref": "ApiLambdaFunction"
             },
-            "CodeSha256": "YOSZwtgG0haYoyow+IxxGtDDHwd4+6+3FLigKlOLbdU="
+            "CodeSha256": "5YvPutpuSZNvykNMXCD4dXLtP+gTl60qvUPWVddHpOc="
           }
         },
         "HttpApi": {
@@ -921,7 +921,7 @@
         "ApiLambdaFunctionQualifiedArn": {
           "Description": "Current Lambda function version",
           "Value": {
-            "Ref": "ApiLambdaVersionqUYuiTeCdn8UgupsdIbFd7O1X0naWBoL3Y5OpcefjD0"
+            "Ref": "ApiLambdaVersionZwwLi0wpa7XlPIUuaPFJbd0EGbSODTcQ4JZRDOQcz8"
           },
           "Export": {
             "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
