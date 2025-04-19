@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateSubscriptionById = exports.createSubscription = exports.removeSubsById = exports.fetchSubsByUserId = void 0;
 const database_1 = require("../database");
+const payment_1 = require("../models/payment");
 const plan_1 = require("../models/plan");
 const subscription_1 = require("../models/subscription");
 const fetchSubsByUserId = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -55,6 +56,7 @@ exports.createSubscription = createSubscription;
 const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0, function* () {
     const subscriptionRepository = database_1.AppDataSource.getRepository(subscription_1.Subscription);
     const planRepository = database_1.AppDataSource.getRepository(plan_1.Plan);
+    const paymentRepository = database_1.AppDataSource.getRepository(payment_1.Payment);
     const subscription = yield subscriptionRepository.findOne({
         where: { id: Number(id) },
         relations: ['plan', 'user'],
@@ -70,6 +72,13 @@ const updateSubscriptionById = (id, request) => __awaiter(void 0, void 0, void 0
         ? new Date(now.setFullYear(now.getFullYear() + 1))
         : new Date(now.setMonth(now.getMonth() + 1));
     yield subscriptionRepository.save(subscription);
+    const payment = yield paymentRepository.findOne({ where: { subscription: { id: subscription.id } } });
+    if (payment) {
+        payment.amount = newPlan.price;
+        payment.state = 'Pending';
+        payment.payment_date = null;
+        yield paymentRepository.save(payment);
+    }
     const updatedSub = yield subscriptionRepository
         .createQueryBuilder('subscription')
         .leftJoinAndSelect('subscription.plan', 'plan')

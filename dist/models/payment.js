@@ -25,7 +25,7 @@ __decorate([
 ], Payment.prototype, "amount", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: Date }),
-    __metadata("design:type", Date)
+    __metadata("design:type", Object)
 ], Payment.prototype, "payment_date", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: 'varchar' }),
