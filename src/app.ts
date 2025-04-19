@@ -13,7 +13,7 @@ app.use(express.json());
 
 //Restricciones de CORS para que solo permita solicitudes de mi dominio
 app.use(cors({
-  origin: 'http://subs-page.s3-website.eu-west-3.amazonaws.com/',
+  origin: 'http://subs-page.s3-website.eu-west-3.amazonaws.com',
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
