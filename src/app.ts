@@ -11,7 +11,7 @@ const serverless = require('serverless-http');
 
 app.use(express.json());
 
-//Restricciones de CORS para que solo permita solicitudes de mi dominio
+// Restricciones de CORS para que solo permita solicitudes de mi dominio
 // app.use(cors({
 //   origin: 'http://localhost:5173',
 //   credentials: true,
