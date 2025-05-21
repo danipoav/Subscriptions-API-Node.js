@@ -91,7 +91,7 @@
       "Properties": {
         "Code": {
           "S3Bucket": "serverless-framework-deployments-eu-west-3-afc997d0-57db",
-          "S3Key": "serverless/subscriptions-api/dev/1745930918808-2025-04-29T12:48:38.808Z/subscriptions-api.zip"
+          "S3Key": "serverless/subscriptions-api/dev/1747823092415-2025-05-21T10:24:52.415Z/subscriptions-api.zip"
         },
         "Handler": "dist/app.handler",
         "Runtime": "nodejs22.x",
@@ -102,10 +102,10 @@
           "Variables": {
             "NODE_ENV": "production",
             "SECRET_KEY": "admin",
-            "DB_HOST": "database-1.cz64qema676d.eu-west-3.rds.amazonaws.com",
-            "DB_USER": "admin",
-            "DB_PASSWORD": "Deluxogta5",
-            "DB_NAME": "subs"
+            "DB_HOST": "bhivai98v4cj4u1cpely-mysql.services.clever-cloud.com",
+            "DB_USER": "uqrt1mpljjkezrac",
+            "DB_PASSWORD": "ES4EVMJgAA6JH6M1919B",
+            "DB_NAME": "bhivai98v4cj4u1cpely"
           }
         },
         "Role": {
@@ -119,14 +119,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersioneRYPvSlFhFLqIYnHiEu5QEe48rNvY6oDwSNd0sLSPMs": {
+    "ApiLambdaVersion6S5nlk9Q2vNIp5ms0Xd5kMUWaQ1oZsdiMnjS9MrWCY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "DmLP39vWtdKJXmp8I0T5yGCSFZbTw5juHxxTZOtSVIQ="
+        "CodeSha256": "PMBfRlibijXCIfeXBqssKqyhNIj0n5ksTzLmFk5TUZs="
       }
     },
     "HttpApi": {
@@ -235,7 +235,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersioneRYPvSlFhFLqIYnHiEu5QEe48rNvY6oDwSNd0sLSPMs"
+        "Ref": "ApiLambdaVersion6S5nlk9Q2vNIp5ms0Xd5kMUWaQ1oZsdiMnjS9MrWCY"
       },
       "Export": {
         "Name": "sls-subscriptions-api-dev-ApiLambdaFunctionQualifiedArn"
